@@ -1217,13 +1217,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1FC32D31B25D90B00FCBCE7 /* Build configuration list for PBXNativeTarget "Monkey" */;
 			buildPhases = (
+				C7BEB8CA1804B0426844D105 /* [CP] Check Pods Manifest.lock */,
 				39E022CE47F997C0BBB90DF9 /* 📦 Check Pods Manifest.lock */,
 				A1FC329D1B25D90B00FCBCE7 /* Sources */,
 				A1FC329E1B25D90B00FCBCE7 /* Frameworks */,
 				A1FC329F1B25D90B00FCBCE7 /* Resources */,
 				0ACB64611B5FE8F200E2D42C /* Embed Frameworks */,
-				B5B6B2C7B3D7442BB38519F0 /* 📦 Embed Pods Frameworks */,
-				DC7101347E127BA490A4129B /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1261,7 +1260,11 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = www.coderyi.com;
 				TargetAttributes = {
+					A1FC32A01B25D90B00FCBCE7 = {
+						DevelopmentTeam = U3639V94TS;
+					};
 					A1FC32C11B25D90B00FCBCE7 = {
+						DevelopmentTeam = U3639V94TS;
 						TestTargetID = A1FC32A01B25D90B00FCBCE7;
 					};
 				};
@@ -1348,34 +1351,26 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		B5B6B2C7B3D7442BB38519F0 /* 📦 Embed Pods Frameworks */ = {
+		C7BEB8CA1804B0426844D105 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Monkey-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Monkey/Pods-Monkey-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DC7101347E127BA490A4129B /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Monkey/Pods-Monkey-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1651,6 +1646,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = U3639V94TS;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Monkey/Monkey-Prefix.pch";
@@ -1679,6 +1675,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = U3639V94TS;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Monkey/Monkey-Prefix.pch";
@@ -1703,6 +1700,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Monkey.app/Monkey";
+				DEVELOPMENT_TEAM = U3639V94TS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -1724,6 +1722,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Monkey.app/Monkey";
+				DEVELOPMENT_TEAM = U3639V94TS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
