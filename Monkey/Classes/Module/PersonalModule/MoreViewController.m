@@ -85,7 +85,8 @@
     //    缓存  清除
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     LoginWebViewController *webViewController=[[LoginWebViewController alloc] init];
-    webViewController.urlString=[NSString stringWithFormat:@"https://github.com/login/oauth/authorize/?client_id=%@&state=1995&redirect_uri=https://github.com/coderyi/monkey&scope=user,public_repo",[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] ];
+    NSString* tempStr=[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1];
+    webViewController.urlString=[NSString stringWithFormat:@"https://github.com/login/oauth/authorize/?client_id=%@&state=1995&redirect_uri=https://github.com/hnsxcxwpf2/Monkey&scope=user,public_repo",tempStr ];
     webViewController.callback=^(NSString *code){
         [self getUserInfoAction];
     };

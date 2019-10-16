@@ -42,9 +42,13 @@
 }
 
 + (NSString *)decrypt:(NSString *)base64EncodedString password:(NSString *)password {
+    /*
   NSData *encryptedData = [NSData base64DataFromString:base64EncodedString];
   NSData *decryptedData = [encryptedData decryptedAES256DataUsingKey:[[password dataUsingEncoding:NSUTF8StringEncoding] SHA256Hash] error:nil];
-  return [[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
+    NSString* retStr=[[NSString alloc] initWithData:decryptedData encoding:NSUTF8StringEncoding];
+    NSLog(@"返回值：%@",retStr);
+    return retStr;*/
+    return base64EncodedString;
 }
 
 @end

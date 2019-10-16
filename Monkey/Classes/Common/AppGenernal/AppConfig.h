@@ -36,8 +36,15 @@
 /**
  *  this is not to be used by you, otherwise infringement
  */
-#define CoderyiClientID @"2Abvwo7M117qA6xHhHAg6th+/28YYY4lA7Z23SXxJG8="
-#define CoderyiClientSecret @"ZVQguKWUuj7votRcUIhThLhmfbrHytkGByT+OSeXxIPttGpbZd84jh1b/rNdl+ek"
+
+//#define CoderyiClientID @"2Abvwo7M117qA6xHhHAg6th+/28YYY4lA7Z23SXxJG8="
+//#define CoderyiClientSecret @"ZVQguKWUuj7votRcUIhThLhmfbrHytkGByT+OSeXxIPttGpbZd84jh1b/rNdl+ek"
+
+//#define CoderyiClientID @"_a8d9c1a366f057a23753"
+//#define CoderyiClientSecret @"_f1e47cd31800a90e517b37731038ae07dca580d2"
+
+#define CoderyiClientID @"_8b629f97d55642527afa"
+#define CoderyiClientSecret @"_b1f72d0f19143a4e58df65dd1f45331194d01c51"
 
 #define RepositoriesTableViewCellheight 95
 #define RankTableViewCellHeight 71

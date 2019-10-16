@@ -24,7 +24,8 @@
     NSString *pathString = [NSString stringWithFormat:@"/login/oauth/access_token/"];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic setValue:[[AESCrypt decrypt:CoderyiClientID password:@"xxxsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] forKey:@"client_id"];
-    [dic setValue:[[AESCrypt decrypt:CoderyiClientSecret password:@"xx3xc45sqvzupb4xsd-sdsd*sd672323q___---_w.."] substringFromIndex:1] forKey:@"client_secret"];
+    NSString* tempStr=[[AESCrypt decrypt:CoderyiClientSecret password:@"xx3xc45sqvzupb4xsd-sdsd*sd672323q___---_w.."] substringFromIndex:1];
+    [dic setValue:tempStr forKey:@"client_secret"];
     [dic setValue:code forKey:@"code"];
     [dic setValue:@"1995" forKey:@"state"];
     [dic setValue:@"https://github.com/coderyi/monkey" forKey:@"redirect_uri"];
@@ -69,11 +70,11 @@
 #pragma mark - event 、news
 - (MKNetworkOperation *)repositoriesTrendingWithPage:(NSInteger)page
                                                login:(NSString *)login
-                                    completoinHandler:(PageListInfoResponseBlock)completionBlock
-                                          errorHandel:(MKNKErrorBlock)errorBlock
+                                   completoinHandler:(PageListInfoResponseBlock)completionBlock
+                                         errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *getString = [NSString stringWithFormat:@"/users/%@/received_events?&page=%ld",login,(long)page];
-        MKNetworkOperation *op =
+    MKNetworkOperation *op =
     [self operationWithPath:getString params:nil httpMethod:@"GET" ssl:YES];
     [op addCompletionHandler:^(MKNetworkOperation *completedOperation) {
         if ([[completedOperation responseJSON]
@@ -102,7 +103,7 @@
 
 - (MKNetworkOperation *)showcasesDetailListWithShowcase:(NSString *)showcase
                                       completoinHandler:(PageListInfoResponseBlock)completionBlock
-                                       errorHandel:(MKNKErrorBlock)errorBlock
+                                            errorHandel:(MKNKErrorBlock)errorBlock
 {
     
     NSString *getString = [NSString stringWithFormat:@"/v2/showcases/%@",showcase];
@@ -135,8 +136,8 @@
 
 - (MKNetworkOperation *)repositoriesTrendingWithType:(NSString *)type
                                             language:(NSString *)language
-                                 completoinHandler:(PageListInfoResponseBlock)completionBlock
-                                       errorHandel:(MKNKErrorBlock)errorBlock
+                                   completoinHandler:(PageListInfoResponseBlock)completionBlock
+                                         errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *getString ;
     if (language.length<1 || !language || [language isEqualToString:NSLocalizedString(@"all languages", @"")]) {
@@ -171,7 +172,7 @@
 }
 
 - (MKNetworkOperation *)showcasesWithCompletoinHandler:(PageListInfoResponseBlock)completionBlock
-                                         errorHandel:(MKNKErrorBlock)errorBlock
+                                           errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *getString = [NSString stringWithFormat:@"/v2/showcases"];
     MKNetworkOperation *op =
@@ -232,9 +233,9 @@
 //Star a repository
 //PUT /user/starred/:owner/:repo
 - (MKNetworkOperation *)starRepoWithOwner:(NSString *)owner
-                                   repo:(NSString *)repo
-                             completoinHandler:(void (^)(BOOL isSuccess))completionBlock
-                                   errorHandel:(MKNKErrorBlock)errorBlock
+                                     repo:(NSString *)repo
+                        completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                              errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
     NSString *path = [NSString stringWithFormat:@"/user/starred/%@/%@?access_token=%@",owner,repo,access_token];
@@ -260,9 +261,9 @@
 }
 
 - (MKNetworkOperation *)unStarRepoWithOwner:(NSString *)owner
-                                     repo:(NSString *)repo
-                        completoinHandler:(void (^)(BOOL isSuccess))completionBlock
-                              errorHandel:(MKNKErrorBlock)errorBlock
+                                       repo:(NSString *)repo
+                          completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                                errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *access_token=[[NSUserDefaults standardUserDefaults] objectForKey:@"access_token"];
     NSString *path = [NSString stringWithFormat:@"/user/starred/%@/%@?access_token=%@",owner,repo,access_token];
@@ -292,8 +293,8 @@
 //https://developer.github.com/v3/users/followers/#check-if-one-user-follows-another
 - (MKNetworkOperation *)checkFollowStatusWithUsername:(NSString *)username
                                           target_user:(NSString *)target_user
-                           completoinHandler:(void (^)(BOOL isFollowing))completionBlock
-                                 errorHandel:(MKNKErrorBlock)errorBlock
+                                    completoinHandler:(void (^)(BOOL isFollowing))completionBlock
+                                          errorHandel:(MKNKErrorBlock)errorBlock
 {
     if (username.length<1) {
         username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
@@ -321,9 +322,9 @@
 }
 
 - (MKNetworkOperation *)followUserWithUsername:(NSString *)username
-                                          target_user:(NSString *)target_user
-                                    completoinHandler:(void (^)(BOOL isSuccess))completionBlock
-                                          errorHandel:(MKNKErrorBlock)errorBlock
+                                   target_user:(NSString *)target_user
+                             completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                                   errorHandel:(MKNKErrorBlock)errorBlock
 {
     if (username.length<1) {
         username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
@@ -352,9 +353,9 @@
 }
 
 - (MKNetworkOperation *)unfollowUserWithUsername:(NSString *)username
-                                   target_user:(NSString *)target_user
-                             completoinHandler:(void (^)(BOOL isSuccess))completionBlock
-                                   errorHandel:(MKNKErrorBlock)errorBlock
+                                     target_user:(NSString *)target_user
+                               completoinHandler:(void (^)(BOOL isSuccess))completionBlock
+                                     errorHandel:(MKNKErrorBlock)errorBlock
 {
     if (username.length<1) {
         username=[[NSUserDefaults standardUserDefaults] objectForKey:@"currentLogin"];
@@ -466,8 +467,8 @@
 //https://developer.github.com/v3/users/#get-a-single-user
 //Get a single user ,GET /users/:username
 - (MKNetworkOperation *)userDetailWithUserName:(NSString *)userName
-                                 completoinHandler:(UserModelResponseBlock)completionBlock
-                                       errorHandel:(MKNKErrorBlock)errorBlock
+                             completoinHandler:(UserModelResponseBlock)completionBlock
+                                   errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *getString = [NSString stringWithFormat:@"/users/%@",userName];
     MKNetworkOperation *op =
@@ -492,7 +493,7 @@
 - (MKNetworkOperation *)userRepositoriesWithPage:(NSInteger)page
                                         userName:(NSString *)userName
                                completoinHandler:(PageListInfoResponseBlock)completionBlock
-                                       errorHandel:(MKNKErrorBlock)errorBlock
+                                     errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *getString = [NSString stringWithFormat:@"/users/%@/repos?sort=updated&page=%ld",userName,(long)page];
     MKNetworkOperation *op =
@@ -527,7 +528,7 @@
 - (MKNetworkOperation *)userFollowersWithPage:(NSInteger)page
                                      userName:(NSString *)userName
                             completoinHandler:(PageListInfoResponseBlock)completionBlock
-                                     errorHandel:(MKNKErrorBlock)errorBlock
+                                  errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *getString = [NSString stringWithFormat:@"/users/%@/followers?page=%ld",userName,(long)page];
     MKNetworkOperation *op =
@@ -562,7 +563,7 @@
 - (MKNetworkOperation *)userFollowingWithPage:(NSInteger)page
                                      userName:(NSString *)userName
                             completoinHandler:(PageListInfoResponseBlock)completionBlock
-                                     errorHandel:(MKNKErrorBlock)errorBlock
+                                  errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *getString = [NSString stringWithFormat:@"/users/%@/following?page=%ld",userName,(long)page];
     MKNetworkOperation *op =
@@ -634,8 +635,8 @@
 //GET /repos/:owner/:repo
 - (MKNetworkOperation *)repositoryDetailWithUserName:(NSString *)userName
                                       repositoryName:(NSString *)repositoryName
-                             completoinHandler:(RepositoryModelResponseBlock)completionBlock
-                                   errorHandel:(MKNKErrorBlock)errorBlock
+                                   completoinHandler:(RepositoryModelResponseBlock)completionBlock
+                                         errorHandel:(MKNKErrorBlock)errorBlock
 {
     NSString *getString = [NSString stringWithFormat:@"/repos/%@/%@",userName,repositoryName];
     MKNetworkOperation *op =
@@ -667,7 +668,7 @@
                                      repositoryName:(NSString *)repositoryName
                                            category:(NSString *)category
                                   completoinHandler:(PageListInfoResponseBlock)completionBlock
-                                  errorHandel:(MKNKErrorBlock)errorBlock
+                                        errorHandel:(MKNKErrorBlock)errorBlock
 {
     if ([category isEqualToString:@"forks"]) {
         NSString *getString = [NSString stringWithFormat:@"/repos/%@/%@/%@?page=%ld",userName,repositoryName,category,(long)page];
